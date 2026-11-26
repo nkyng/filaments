@@ -133,8 +133,9 @@ module tampa_placa() {
       translate([0,0,-1]) cylinder(d=m3_clear, h=lid_t+2);
       translate([0,0,-0.01]) cylinder(d1=m3_csk, d2=m3_clear, h=1.6);
     }
-    // passagem dos cabos para o pod (larga: o plugue USB pode estar dos dois lados)
-    translate([-70, -100, -1]) cube([140, 22, lid_t+2]);
+    // passagem dos cabos para o pod (larga: o plugue USB pode estar dos dois lados);
+    // fica por dentro das paredes do pod, escondida embaixo dele
+    translate([-(pod_w/2 - pod_t - 1), -100, -1]) cube([pod_w - 2*pod_t - 2, 22, lid_t+2]);
     // folga da coluna do prato
     translate([col_x, cell_y, -1]) linear_extrude(lid_t+2) rrect(col_w+6, col_dp+6, 4);
     // bolso do PN532 por baixo (sobra 1 mm sobre a antena)
