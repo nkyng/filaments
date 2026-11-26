@@ -26,8 +26,11 @@ Tempo estimado: 30–60 min.
 
 1. No PN532 há **duas chavinhas** (SEL0 e SEL1). Coloque no modo **I2C**:
    - **SEL0 = ON (1)** e **SEL1 = OFF (0)** — confira a tabelinha impressa na própria placa.
-2. Se o PN532 veio com os pinos soltos (não soldados), solde a fileira de 4 pinos
-   **GND, VCC, SDA, SCL**.
+2. Se o PN532 veio com os pinos soltos (não soldados), solde só a fileira de **4 pinos**
+   (GND, VCC, TXD, RXD). A fileira de 8 pinos não é usada.
+   - No modo I2C, **TXD = SDA** e **RXD = SCL** (na frente da placa costuma estar escrito SDA/SCL).
+   - Dentro da caixa a antena encosta na tampa: deixe o plástico do conector no lado **sem a antena**,
+     ou solde os fios direto nos furos (fica mais fino).
 
 ## Passo 3 — Ligue os fios
 
@@ -42,8 +45,8 @@ A CYD tem três conectores pequenos (JST 1.25). Os nomes estão impressos na pla
 |---|---|
 | 3.3V | VCC |
 | GND | GND |
-| IO27 | SDA |
-| IO22 | SCL |
+| IO27 | SDA (TXD) |
+| IO22 | SCL (RXD) |
 
 ### Balança
 
