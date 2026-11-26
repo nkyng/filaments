@@ -18,7 +18,7 @@ e diz em qual impressora e slot ele está. O consumo de cada impressão é desco
 ## Etapas
 
 1. **[Teste do hardware](docs/01-teste-do-hardware.md)** — ligar tudo na bancada e conferir. ← *agora*
-2. Medidas reais → arquivos STL da caixa
+2. **[Impressão da caixa (v0)](docs/02-impressao-da-caixa.md)** — STL prontos com medidas padrão
 3. Firmware da central (telas, Wi-Fi, Spoolman)
 4. Servidor: Spoolman + ponte Bambu (H2S) + Bespok3d (U1)
 
@@ -26,3 +26,4 @@ e diz em qual impressora e slot ele está. O consumo de cada impressão é desco
 
 - `firmware/teste-hardware/` — firmware de teste (PlatformIO). Binários prontos em `bin/`.
 - `docs/` — guias passo a passo.
+- `hardware/` — caixa paramétrica (OpenSCAD) e STL prontos em `hardware/stl/`.
