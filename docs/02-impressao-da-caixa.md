@@ -30,7 +30,7 @@ Todos os STL já estão **na posição de impressão** — é só abrir no fatia
 | `bandeja.stl` | 200 × 240 × 29 | fundo na mesa | maior peça (~3–4 h) |
 | `tampa.stl` | 200 × 240 × 3 | face de cima na mesa | fica lisa por cima |
 | `prato.stl` | Ø160 × 17 | face de cima na mesa | marca NFC gravada |
-| `pod.stl` | 150 × 53 × 42 | apoiado na face de trás | fechado atrás; a CYD entra por baixo |
+| `pod.stl` | 120 × 53 × 42 | apoiado na face de trás | fechado atrás; a CYD entra por baixo |
 | `cone.stl` | Ø50 × 19 | ponta fina na mesa | |
 
 **Configuração sugerida:** PETG ou PLA, bico 0.4, camada 0.2, 3 paredes, 15–20% de preenchimento
@@ -74,8 +74,8 @@ própria CYD. Use qualquer carregador de celular **5V / 1A** ou mais.
 
 Caminho do cabo:
 
-1. Liga na CYD **dentro do pod** (o pod é fechado atrás; sobram ~30 mm de cada lado da placa,
-   cabe plugue reto).
+1. Liga na CYD **dentro do pod** com um **cabo USB-C em L (90°)** — sobram ~14 mm de cada lado
+   da placa, não cabe plugue reto. Busque "cabo usb-c 90 graus".
 2. Desce pelo **rasgo largo da tampa**, embaixo do pod.
 3. Passa **por dentro da bandeja**, rente à parede lateral, até o lado do rolo.
 4. Passa **apertado entre os dois pinos** embaixo da tampa (trava contra puxão).

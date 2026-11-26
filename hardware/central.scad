@@ -58,7 +58,7 @@ pn_y = cell_y - nfc_off;  // -10
 pn_depth = 2;           // sobra 1 mm de tampa sobre a antena
 
 // ---------- pod da tela ----------
-pod_w = 150;            // largo o bastante para um plugue USB reto ao lado da CYD
+pod_w = 120;            // ~14 mm de cada lado da CYD: use cabo USB-C em L (90 graus)
 pod_t = 2.4;
 // perfil lateral (Y, Z): frente baixa -> topo traseiro
 pod_prof = [[-118, lid_z+lid_t], [-118, 42], [-68, 74], [-65, 74], [-65, lid_z+lid_t]];
