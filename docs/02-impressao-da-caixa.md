@@ -12,8 +12,7 @@ Arquivos em [`hardware/stl/`](../hardware/stl). Fonte paramétrica: [`hardware/c
 
 **Tudo num arquivo só:** [`hardware/stl/central-nfc-v0.3mf`](../hardware/stl/central-nfc-v0.3mf)
 — abra no Bambu Studio com a **H2S** selecionada e aperte **A** (Organizar todos os objetos).
-Ele divide sozinho em 3 placas: (1) bandeja + pod + cone, (2) tampa, (3) prato.
-Depois, selecione o **pod** e ative **brim de 5 mm** nas configurações do objeto.
+Ele divide sozinho nas placas que precisar.
 
 **Cores já definidas no 3MF** (preto + cinza). Ao abrir, o Bambu Studio pergunta como ligar as
 cores aos filamentos — escolha o preto e o cinza do AMS.
@@ -31,7 +30,7 @@ Todos os STL já estão **na posição de impressão** — é só abrir no fatia
 | `bandeja.stl` | 200 × 240 × 29 | fundo na mesa | maior peça (~3–4 h) |
 | `tampa.stl` | 200 × 240 × 3 | face de cima na mesa | fica lisa por cima |
 | `prato.stl` | Ø160 × 17 | face de cima na mesa | marca NFC gravada |
-| `pod.stl` | 120 × 53 × 42 | apoiado na face de trás | **use brim de 5 mm** (pouca área na mesa) |
+| `pod.stl` | 150 × 53 × 42 | apoiado na face de trás | fechado atrás; a CYD entra por baixo |
 | `cone.stl` | Ø50 × 19 | ponta fina na mesa | |
 
 **Configuração sugerida:** PETG ou PLA, bico 0.4, camada 0.2, 3 paredes, 15–20% de preenchimento
@@ -59,25 +58,36 @@ Confira qual rosca tem a sua célula (geralmente **M4 numa ponta e M5 na outra**
    - A ponta direita tem que ficar **solta no ar** (sem encostar no fundo).
 2. **HX711** na moldurinha ao lado da célula, com fita dupla-face.
 3. **PN532** no bolso embaixo da tampa (antena virada **para cima**, encostando na tampa), com fita.
-4. **CYD** no pod: o vidro da tela encaixa no rebaixo atrás da janela. Prenda com cola quente
-   nos cantos da placa (não na tela).
+4. **CYD** no pod, entrando **por baixo**: o vidro da tela encaixa no rebaixo atrás da janela.
+   Ligue o cabo USB antes e prenda a placa com cola quente nos cantos (não na tela).
 5. **Pod na tampa**: 4 parafusos M3 por baixo da tampa. Os cabos passam pelo rasgo da tampa.
-6. **Tampa na bandeja**: 4 parafusos M3 nos cantos. O cabo USB sai pelo rasgo na frente da bandeja.
+6. **Tampa na bandeja**: 4 parafusos M3 nos cantos. O cabo USB passa entre os pinos e sai pelo rasgo de trás.
 7. **Prato**: a coluna passa pelo furo da tampa e apoia na ponta livre da célula.
    Parafusos escareados por cima (ficam rentes).
    - O prato **não pode encostar na tampa** — confira se ele balança livre ~4 mm acima dela.
 8. **Cone**: encaixe no furo central do prato.
 
-## Alimentação
+## Alimentação (cabo escondido)
 
 Tudo é alimentado por **um único cabo USB** ligado na CYD. O PN532 e o HX711 recebem 3.3V da
 própria CYD. Use qualquer carregador de celular **5V / 1A** ou mais.
 
-- **v0.1 (recomendado):** o pod tem um **rasgo nas duas laterais** atrás da tela. O cabo entra pelo
-  lado em que ficou o conector USB da CYD e vai direto na placa.
-- **Pod v0 (sem rasgo):** passe a ponta pequena do cabo (USB-C/micro) de fora para dentro pelo
-  rasgo da frente da bandeja, suba pelo rasgo da tampa e ligue na CYD. Como sobram só ~14 mm de
-  cada lado da placa dentro do pod, use um cabo com **plugue em L (90°)**.
+Caminho do cabo:
+
+1. Liga na CYD **dentro do pod** (o pod é fechado atrás; sobram ~30 mm de cada lado da placa,
+   cabe plugue reto).
+2. Desce pelo **rasgo largo da tampa**, embaixo do pod.
+3. Passa **por dentro da bandeja**, rente à parede lateral, até o lado do rolo.
+4. Passa **apertado entre os dois pinos** embaixo da tampa (trava contra puxão).
+5. Sai pelo **rasgo da parede de trás** (lado do rolo).
+
+O rasgo da frente da bandeja (da v0) é fechado por um **tampão** que já vem na tampa.
+
+### Bandeja v0 já impressa (sem saída atrás)
+
+Faça um rasgo de **8 mm de largura × 10 mm de profundidade** no topo da parede de trás, alinhado
+com os dois pinos da tampa (coloque a tampa por cima para marcar). Ferro de solda, estilete
+aquecido ou broca + lima resolvem. Ou reimprima a bandeja — o arquivo novo já tem o rasgo.
 
 ## Antes de fechar tudo
 

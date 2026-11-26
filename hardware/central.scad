@@ -1,4 +1,4 @@
-// Central NFC de Filamentos - caixa v0.1 (pod com passagem lateral do USB)
+// Central NFC de Filamentos - caixa v0.2 (cabo escondido, saindo por tras)
 // Medidas em mm. Sistema: X = largura, Y = profundidade (+Y = fundos), Z = altura.
 // A frente (lado da tela) fica em Y = -120.
 //
@@ -58,7 +58,7 @@ pn_y = cell_y - nfc_off;  // -10
 pn_depth = 2;           // sobra 1 mm de tampa sobre a antena
 
 // ---------- pod da tela ----------
-pod_w = 120;
+pod_w = 150;            // largo o bastante para um plugue USB reto ao lado da CYD
 pod_t = 2.4;
 // perfil lateral (Y, Z): frente baixa -> topo traseiro
 pod_prof = [[-118, lid_z+lid_t], [-118, 42], [-68, 74], [-65, 74], [-65, lid_z+lid_t]];
@@ -66,8 +66,12 @@ win_w = 66; win_h = 48;          // janela da tela (area visivel 57.6 x 43.2 + f
 pocket_w = 72; pocket_h = 54;    // rebaixo interno que posiciona o vidro da tela
 slope_a = atan2(74-42, 118-68);  // ~32.6 graus
 face_c = [(-118 + -68)/2, (42 + 74)/2];
-usb_len = 30;                    // comprimento do rasgo ao longo da rampa
-usb_d0 = 5; usb_d1 = 15;         // profundidade do rasgo (a partir da face da tela)
+// ---------- cabo de alimentacao ----------
+// O cabo desce do pod para dentro da bandeja e sai pela parede de tras (lado do rolo).
+cable_x = -70;          // posicao da saida na parede de tras
+cable_w = 8;            // largura do rasgo (cabo ate ~6 mm)
+cable_h = 10;           // profundidade do rasgo a partir do topo da parede
+front_notch = [-7, 14, 9];   // rasgo da frente da bandeja v0 (x0, largura, altura) - a tampa o fecha
 pod_tab_x = pod_w/2 - pod_t - 4;          // 53.6
 pod_tabs = [[ pod_tab_x, -69], [-pod_tab_x, -69], [ pod_tab_x, -106], [-pod_tab_x, -106]];
 corner_screws = [for (sx=[-1,1], sy=[-1,1]) [sx*(W/2-9), sy*(D/2-9)]];
@@ -97,8 +101,10 @@ module bandeja() {
       hull() for (dx = [-slot, slot]) translate([x+dx, cell_y, -1]) cylinder(d=cell_screw, h=cell_z+2);
       hull() for (dx = [-slot, slot]) translate([x+dx, cell_y, -1]) cylinder(d=cell_cbore, h=1+2.5);
     }
-    // saida do cabo USB na frente
-    translate([-7, -D/2-1, tray_h-8]) cube([14, wall+2, 9]);
+    // rasgo da frente (existia na v0; a tampa tem um tampao que o fecha)
+    translate([front_notch[0], -D/2-1, tray_h-front_notch[2]+0.01]) cube([front_notch[1], wall+2, front_notch[2]]);
+    // saida do cabo por tras
+    translate([cable_x - cable_w/2, D/2-wall-1, tray_h-cable_h]) cube([cable_w, wall+2, cable_h+1]);
     // rebaixos para pes de borracha adesivos
     for (sx=[-1,1], sy=[-1,1]) translate([sx*82, sy*102, -1]) cylinder(d=12.5, h=1.6);
   }
@@ -106,7 +112,16 @@ module bandeja() {
 
 // ================= TAMPA =================
 module tampa() {
-  translate([0, 0, lid_z]) difference() {
+  translate([0, 0, lid_z]) {
+    // tampao que fecha o rasgo da frente da bandeja (folga de 0.3 mm)
+    translate([front_notch[0]+0.3, -D/2+0.3, -front_notch[2]+0.3]) cube([front_notch[1]-0.6, wall-0.3, front_notch[2]-0.3+0.01]);
+    // trava do cabo: o cabo passa apertado entre os dois pinos antes de sair
+    for (dx = [-5, 5]) translate([cable_x + dx, D/2 - wall - 10, -10]) cylinder(d=6, h=10.01);
+    tampa_placa();
+  }
+}
+module tampa_placa() {
+  difference() {
     linear_extrude(lid_t) rrect(W, D, R);
     // parafusos da tampa (escareados por cima)
     for (p = corner_screws) translate([p[0], p[1], 0]) {
@@ -118,8 +133,8 @@ module tampa() {
       translate([0,0,-1]) cylinder(d=m3_clear, h=lid_t+2);
       translate([0,0,-0.01]) cylinder(d1=m3_csk, d2=m3_clear, h=1.6);
     }
-    // passagem dos cabos para o pod
-    translate([-35, -100, -1]) cube([70, 22, lid_t+2]);
+    // passagem dos cabos para o pod (larga: o plugue USB pode estar dos dois lados)
+    translate([-70, -100, -1]) cube([140, 22, lid_t+2]);
     // folga da coluna do prato
     translate([col_x, cell_y, -1]) linear_extrude(lid_t+2) rrect(col_w+6, col_dp+6, 4);
     // bolso do PN532 por baixo (sobra 1 mm sobre a antena)
@@ -133,7 +148,8 @@ module pod_solid() {
 }
 module pod_inner() {
   translate([-pod_w/2 + pod_t, 0, 0]) rotate([90, 0, 90]) linear_extrude(pod_w - 2*pod_t)
-    hull() for (t = [[0,0], [30,0], [0,-30], [30,-30]]) translate(t) offset(delta=-pod_t) polygon(pod_prof);
+    // fechado atras (esconde a placa); aberto so embaixo, por onde entram a CYD e os cabos
+    hull() for (t = [[0,0], [0,-30]]) translate(t) offset(delta=-pod_t) polygon(pod_prof);
 }
 module on_face() {  // coloca o filho centrado na face inclinada (X largura, Y ao longo da rampa, Z normal)
   translate([0, face_c[0], face_c[1]]) rotate([slope_a, 0, 0]) children();
@@ -162,9 +178,6 @@ module pod() {
     on_face() cube([win_w, win_h, 20], center=true);
     // rebaixo interno que encaixa o vidro do display (deixa 1.2 mm de moldura)
     on_face() translate([0, 0, -pod_t]) cube([pocket_w, pocket_h, 2.4], center=true);
-    // passagem do cabo USB direto na lateral (dos dois lados, a CYD pode ficar virada
-    // para qualquer um): faixa atras da placa, onde ficam os conectores USB
-    on_face() translate([0, 0, -(usb_d0 + usb_d1)/2]) cube([pod_w + 10, usb_len, usb_d1 - usb_d0], center=true);
     // furos das abas
     for (p = pod_tabs) translate([p[0], p[1], lid_z+lid_t-1]) cylinder(d=m3_pilot, h=5);
   }
