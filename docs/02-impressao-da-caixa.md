@@ -10,6 +10,11 @@ Arquivos em [`hardware/stl/`](../hardware/stl). Fonte paramétrica: [`hardware/c
 
 ## Peças
 
+**Tudo num arquivo só:** [`hardware/stl/central-nfc-v0.3mf`](../hardware/stl/central-nfc-v0.3mf)
+— abra no Bambu Studio com a **H2S** selecionada e aperte **A** (Organizar todos os objetos).
+Ele divide sozinho em 3 placas: (1) bandeja + pod + cone, (2) tampa, (3) prato.
+Depois, selecione o **pod** e ative **brim de 5 mm** nas configurações do objeto.
+
 Todos os STL já estão **na posição de impressão** — é só abrir no fatiador e fatiar. Nenhuma precisa de suporte.
 
 | Arquivo | Tamanho (mm) | Posição | Observação |
