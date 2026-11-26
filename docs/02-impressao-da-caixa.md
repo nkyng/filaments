@@ -68,6 +68,17 @@ Confira qual rosca tem a sua célula (geralmente **M4 numa ponta e M5 na outra**
    - O prato **não pode encostar na tampa** — confira se ele balança livre ~4 mm acima dela.
 8. **Cone**: encaixe no furo central do prato.
 
+## Alimentação
+
+Tudo é alimentado por **um único cabo USB** ligado na CYD. O PN532 e o HX711 recebem 3.3V da
+própria CYD. Use qualquer carregador de celular **5V / 1A** ou mais.
+
+- **v0.1 (recomendado):** o pod tem um **rasgo nas duas laterais** atrás da tela. O cabo entra pelo
+  lado em que ficou o conector USB da CYD e vai direto na placa.
+- **Pod v0 (sem rasgo):** passe a ponta pequena do cabo (USB-C/micro) de fora para dentro pelo
+  rasgo da frente da bandeja, suba pelo rasgo da tampa e ligue na CYD. Como sobram só ~14 mm de
+  cada lado da placa dentro do pod, use um cabo com **plugue em L (90°)**.
+
 ## Antes de fechar tudo
 
 Faça o [teste do hardware](01-teste-do-hardware.md) com a balança já montada na bandeja:

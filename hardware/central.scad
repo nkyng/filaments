@@ -1,4 +1,4 @@
-// Central NFC de Filamentos - caixa v0
+// Central NFC de Filamentos - caixa v0.1 (pod com passagem lateral do USB)
 // Medidas em mm. Sistema: X = largura, Y = profundidade (+Y = fundos), Z = altura.
 // A frente (lado da tela) fica em Y = -120.
 //
@@ -66,6 +66,8 @@ win_w = 66; win_h = 48;          // janela da tela (area visivel 57.6 x 43.2 + f
 pocket_w = 72; pocket_h = 54;    // rebaixo interno que posiciona o vidro da tela
 slope_a = atan2(74-42, 118-68);  // ~32.6 graus
 face_c = [(-118 + -68)/2, (42 + 74)/2];
+usb_len = 30;                    // comprimento do rasgo ao longo da rampa
+usb_d0 = 5; usb_d1 = 15;         // profundidade do rasgo (a partir da face da tela)
 pod_tab_x = pod_w/2 - pod_t - 4;          // 53.6
 pod_tabs = [[ pod_tab_x, -69], [-pod_tab_x, -69], [ pod_tab_x, -106], [-pod_tab_x, -106]];
 corner_screws = [for (sx=[-1,1], sy=[-1,1]) [sx*(W/2-9), sy*(D/2-9)]];
@@ -160,6 +162,9 @@ module pod() {
     on_face() cube([win_w, win_h, 20], center=true);
     // rebaixo interno que encaixa o vidro do display (deixa 1.2 mm de moldura)
     on_face() translate([0, 0, -pod_t]) cube([pocket_w, pocket_h, 2.4], center=true);
+    // passagem do cabo USB direto na lateral (dos dois lados, a CYD pode ficar virada
+    // para qualquer um): faixa atras da placa, onde ficam os conectores USB
+    on_face() translate([0, 0, -(usb_d0 + usb_d1)/2]) cube([pod_w + 10, usb_len, usb_d1 - usb_d0], center=true);
     // furos das abas
     for (p = pod_tabs) translate([p[0], p[1], lid_z+lid_t-1]) cylinder(d=m3_pilot, h=5);
   }
