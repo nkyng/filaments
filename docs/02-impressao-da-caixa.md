@@ -15,6 +15,15 @@ Arquivos em [`hardware/stl/`](../hardware/stl). Fonte paramétrica: [`hardware/c
 Ele divide sozinho em 3 placas: (1) bandeja + pod + cone, (2) tampa, (3) prato.
 Depois, selecione o **pod** e ative **brim de 5 mm** nas configurações do objeto.
 
+**Cores já definidas no 3MF** (preto + cinza). Ao abrir, o Bambu Studio pergunta como ligar as
+cores aos filamentos — escolha o preto e o cinza do AMS.
+
+| Peça | Cor |
+|---|---|
+| Bandeja | cinza |
+| Tampa, pod, cone | preto |
+| Prato | cinza, com a marca NFC (círculo, texto e seta) em preto |
+
 Todos os STL já estão **na posição de impressão** — é só abrir no fatiador e fatiar. Nenhuma precisa de suporte.
 
 | Arquivo | Tamanho (mm) | Posição | Observação |
